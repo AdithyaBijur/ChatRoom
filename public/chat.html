@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.rawgit.com/mervick/emojionearea/master/dist/emojionearea.min.css"
+    />
+    <script
+      type="text/javascript"
+      src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdn.rawgit.com/mervick/emojionearea/master/dist/emojionearea.min.js"
+    ></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"
+      integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk="
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+    <title>ChatRoom</title>
+    <link href="lib/css/emoji.css" rel="stylesheet" />
+    <link
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="chat-container">
+      <header class="chat-header">
+        <h1><i class="fas fa-comments"></i> ChatRoom</h1>
+        <a href="index.html" class="btn">Leave Room</a>
+      </header>
+      <main class="chat-main">
+        <div class="chat-sidebar">
+          <h3><i class="fas fa-comments"></i> Room Name:</h3>
+          <h2 id="room-name"></h2>
+          <h3><i class="fas fa-users"></i> Users</h3>
+          <ul id="users"></ul>
+        </div>
+        <div class="chat-messages">
+
+      
+        </div>
+      </main>
+      <div class="chat-form-container">
+        <form id="chat-form" enctype="multipart/form-data" novalidate>
+          <div class="msgdiv">
+            <input
+              id="msg"
+              name='msg'
+              type="text"
+              placeholder="Enter Message"
+              autocomplete="off"
+            />
+           
+              <input id="uploadfile" name="myfile" type="file" />
+</div>
+          <!-- <button class="btn" id='emoji-button'><i class="fas fa-comments"></i>s</button> -->
+          <button id='send' type="submit" class="btn"><i class="fas fa-paper-plane"></i> Send</button>
+        </form>
+      </div>
+    </div>
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.9.2/qs.min.js"
+      integrity="sha256-TDxXjkAUay70ae/QJBEpGKkpVslXaHHayklIVglFRT4="
+      crossorigin="anonymous"
+    ></script>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="js/main.js"></script>
+    <!-- <script src="lib/js/config.js"></script> -->
+    <!-- <script src="lib/js/util.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/emojionearea/3.4.2/emojionearea.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        $("#msg").emojioneArea({
+          events: {
+      ready: function() {
+        this.setFocus();
+      }
+      
+    }
+        });
+      });
+
+      
+    </script>
+  </body>
+</html>
