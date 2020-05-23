@@ -32,18 +32,24 @@
   <body>
     <div class="chat-container">
       <header class="chat-header">
-        <h1><i class="fas fa-comments"></i> ChatRoom</h1>
-        <a href="index.html" class="btn">Leave Room</a>
+        <h1><i class="fas fa-comments"></i> ChatRoom </h1>
+      
+        <a href="index.html" class="btn">Exit Room</a>
       </header>
       <main class="chat-main">
         <div class="chat-sidebar">
           <h3><i class="fas fa-comments"></i> Room Name:</h3>
           <h2 id="room-name"></h2>
+         
+         
           <h3><i class="fas fa-users"></i> Users</h3>
+          <div class="typing">
+
+          </div>
           <ul id="users"></ul>
         </div>
         <div class="chat-messages">
-
+        
       
         </div>
       </main>
@@ -84,6 +90,31 @@
       ready: function() {
         this.setFocus();
       }
+      ,
+      keydown: function (editor, event) {
+       //   console.log('event:keydown', event.which); //work
+          text=$("div.emojionearea-editor").data("emojioneArea").getText()
+          if (event.which==8) text=text.slice(0,-1)
+
+
+
+          if(text)
+          socket.emit('typing')
+          else socket.emit('notyping')
+          if (event.which==8) 
+          {
+            text=$("div.emojionearea-editor").data("emojioneArea").getText()
+          //  console.log(text)
+            if(!text) socket.emit('notyping')
+            setTimeout(function(){
+              text=$("div.emojionearea-editor").data("emojioneArea").getText()
+           // console.log(text,'timeout')
+            if(!text) socket.emit('notyping')
+
+             }, 200)
+
+          }
+        }
       
     }
         });

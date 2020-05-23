@@ -27,14 +27,14 @@ io.on('connection', socket => {
     socket.join(user.room);
 
     // Welcome current user
-    socket.emit('message', formatMessage(botName, `Welcome to the ${user.room} Room!`));
+    socket.emit('message', formatMessage(botName, `Welcome to the ${user.room} Room 🙂!`));
 
     // Broadcast when a user connects
     socket.broadcast
       .to(user.room)
       .emit(
         'message',
-        formatMessage(botName, `${user.username} has joined the room`)
+        formatMessage(botName, `${user.username} has joined the room 😄`)
       );
 
     // Send users and room info
@@ -52,7 +52,14 @@ io.on('connection', socket => {
     io.to(socket.id).emit('message', formatMessage('You', msg));   //trial send only to ourself to get username you
   });
 
-
+socket.on('typing',()=>{
+  const user = getCurrentUser(socket.id);
+  io.in(user.room).emit('utyping',user.username)
+})
+socket.on('notyping',()=>{
+  const user = getCurrentUser(socket.id);
+  io.in(user.room).emit('noutyping')
+})
 //for files
 socket.on('base64 file', function (msg) {
   //console.log('received base64 file from' + msg.username);
@@ -90,7 +97,7 @@ socket.on('base64 file', function (msg) {
     if (user) {
       io.to(user.room).emit(
         'message',
-        formatMessage(botName, `${user.username} has left the chat`)
+        formatMessage(botName, `${user.username} has left the chat ☹`)
       );
 
       // Send users and room info

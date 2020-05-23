@@ -17,7 +17,7 @@
 
 body {
 	font-family: 'Roboto', sans-serif;
-	font-size: 16px;
+	font-size: 18px;
 	background: var(--light-color);
 	margin: 20px;
 }
@@ -107,6 +107,11 @@ input[type='file']{
 	border-radius: 5px;
 	clear:both;
    float:left;
+}
+ 
+.typing{
+	font-weight: bolder;
+	padding:10px 0;
 }
 .You{
 	background-color: var(--light-color-b) !important;
@@ -221,4 +226,22 @@ input[type='file']{
 	.chat-sidebar {
 		display: none;
 	}
+	#send{
+	
+		height:35px;
+		margin-left: 10px;
+		margin-right: 10px;
+	}
+	.chat-form-container form {
+		display: flex;
+		flex-direction: column;
+	}
+	input[type='file']{
+		color:white;
+		font-size:15px;
+		margin-bottom: 15px;
+		margin-left: 10px;
+	  }
+	
+	  
 }

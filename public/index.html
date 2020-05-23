@@ -4,6 +4,7 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<script src="js/main.js"></script>
 		<link
 			rel="stylesheet"
 			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"
@@ -19,7 +20,7 @@
 				<h1><i class="fas fa-comments"></i> ChatRoom</h1>
 			</header>
 			<main class="join-main">
-				<form action="chat.html">
+				<form id='join' action="chat.html"   onsubmit="return onjoin()">
 					<div class="form-control">
 						<label for="username">Username</label>
 						<input
@@ -27,6 +28,7 @@
 							name="username"
 							id="username"
 							placeholder="Enter username..."
+							maxlength="15"
 							required
 						/>
 					</div>
@@ -37,12 +39,15 @@
 							name="room"
 							id="room"
 							placeholder="Enter Room..."
+							maxlength="15"
 							required
 						/>
 					</div>
 					<button type="submit" class="btn">Join Chat</button>
 				</form>
 			</main>
+	
 		</div>
+		
 	</body>
 </html>

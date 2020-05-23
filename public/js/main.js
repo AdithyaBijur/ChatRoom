@@ -6,9 +6,15 @@ const userList = document.getElementById("users");
 // const button = document.querySelector('#emoji-button');
 // const picker = new EmojiButton();
 // Get username and room from URL
-const { username, room } = Qs.parse(location.search, {
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+var { username, room } = Qs.parse(location.search, {
   ignoreQueryPrefix: true,
 });
+room=capitalizeFirstLetter(room)
+username=capitalizeFirstLetter(username)
 
 const socket = io();
 
@@ -29,6 +35,24 @@ socket.on("message", (message) => {
   // Scroll down
   chatMessages.scrollTop = chatMessages.scrollHeight;
 });
+
+socket.on('utyping',(username)=>{
+ // console.log('typing',username)
+
+  const div = document.createElement("div");
+  div.innerHTML = `${username} is typing....`
+  if (document.querySelector(".typing").children.length==0)
+  document.querySelector(".typing").appendChild(div);
+  else{
+    $(".typing").empty();
+    document.querySelector(".typing").appendChild(div);
+  }
+})
+
+socket.on('noutyping',()=>{
+  $(".typing").empty();
+})
+
 
 socket.on("image", (message) => {
   // console.log(message);
@@ -59,6 +83,7 @@ chatForm.addEventListener("submit", (e) => {
   //console.log(msg)
   if (msg) {
     socket.emit("chatMessage", msg);
+    socket.emit("notyping")
 
     // Clear input
     $("div.emojionearea-editor").data("emojioneArea").setText('');
@@ -97,7 +122,7 @@ function outputImage(message) {
   <source src="${message.text}" type="video/ogg">
   Your browser does not support HTML video.`
 else display=
-`<a target='_blank' onclick=showtxt("${message.text}")>Click to view Text file</a>`
+`<a target='_blank' onclick=showtxt("${message.text}")>Click to view file</a>`
   //console.log(message.type)
 
 
